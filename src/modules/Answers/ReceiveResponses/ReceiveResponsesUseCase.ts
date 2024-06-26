@@ -3,15 +3,15 @@ import { ListAnswersUserUseCase } from "../ListAnswersUser/ListAnswersUserUseCas
 
 
 export class ReceiveResponsesUseCase {
-  async execute(objectives: number[], subjective1: number, subjective2: number, phone: string){
-    const user = await prisma.user.findUnique(
+  async execute(objectives: number[], subjective1: number, subjective2: number, cpf: string){
+    const user = await prisma.user.findMany(
       {
         where: {
-          phone
+          cpf
         }
       }
     )
-    if (!user){
+    if (user.length == 0){
       throw new Error("Usuário não encontrado");
     }
 
@@ -25,7 +25,7 @@ export class ReceiveResponsesUseCase {
     objectives.forEach(async (alternative, index) => {
       const answer = await prisma.answers.create({
         data: {
-          userId: user.id,
+          userId: user[0].id,
           questionId: index,
           alternative: alternative,
           correct: gabarito[index].correct,
@@ -35,7 +35,7 @@ export class ReceiveResponsesUseCase {
     })
 
     const listAnswersUserUseCase = new ListAnswersUserUseCase()
-    const respostas = await listAnswersUserUseCase.execute(phone)
+    const respostas = await listAnswersUserUseCase.execute(user[0].phone)
     const total_pontos = respostas.reduce((sum, resposta) => {
       if (resposta.alternative == resposta.correct){
         sum = sum +1 
@@ -44,7 +44,7 @@ export class ReceiveResponsesUseCase {
       },0 )
       const user_update = await prisma.user.update({
         where:{
-          phone
+          id: user[0].id
         },
         data:{
           total_pontos: total_pontos,

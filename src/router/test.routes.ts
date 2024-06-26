@@ -20,7 +20,7 @@ const listAnswersUserController = new ListAnswersUserController();
 // const deleteUserUseCase = new DeleteUserController();
 const respostaAssinaladaController = new RespostaAssinaladaController()
 
-routes.post("/receiver/:phone", receiveResponsesController.handle);
+routes.post("/receiver/:cpf", receiveResponsesController.handle);
 routes.post("/resposta", respostaAssinaladaController.handle);
 routes.post("/iniciar/:phone", iniciarTesteController.handle);
 // routes.post("", createQuestionController.handle);

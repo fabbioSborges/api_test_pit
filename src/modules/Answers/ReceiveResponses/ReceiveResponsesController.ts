@@ -8,7 +8,7 @@ export class ReceiveResponsesController {
 
       const result = await receiveResponsesUseCase.execute(req.body.objectives, 
           req.body.subjective1, req.body.subjective2, 
-            req.params.phone);     
+            req.params.cpf);     
       return res.json(result);
     } catch (e: any) {
       return res.status(500).json({
