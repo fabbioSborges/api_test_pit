@@ -1,10 +1,9 @@
 import { prisma } from "../../../database/prismaClients";
 
 export class ValidarUseUseCase {
-  async execute(phone: string, cpf: string ) {
-    const user  = await prisma.user.findUnique({
+  async execute( cpf: string ) {
+    const user  = await prisma.user.findMany({
       where: {
-        phone: phone,
         cpf: cpf
       }
     });
@@ -14,22 +13,22 @@ export class ValidarUseUseCase {
         "message": `Não é possivel validar o candidato: CPF ${cpf} não encontrado`}
     }
 
-    if (user.final_test){
+    if (user[0].final_test){
       return {"is_valid": false, 
-        "message": `Usuario ${user.name} finalizou o teste no horario ${user.final_test} `}
+        "message": `Usuario ${user[0].name} finalizou o teste no horario ${user[0].final_test} `}
     }
 
     const userEdit = await prisma.user.update({
       where: {
-        phone: phone
+        phone: user[0].phone
       }, 
       data: {
         start_text: new Date()
       }
     })
-    
+
     return {"is_valid": true, 
-                    "message": `Usuario ${user.name} validado com sucesso`}
+                    "message": `Usuario ${user[0].name} validado com sucesso`}
   }
 }
 

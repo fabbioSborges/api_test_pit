@@ -18,7 +18,7 @@ const validaUserController = new ValidaUserController();
 
 routes.post("", createUserController.handle);
 // routes.get("", listUserController.handle);
-routes.get("/valida", validaUserController.handle);
+routes.get("/valida/:cpf", validaUserController.handle);
 routes.get("/:id", getUserController.handle);
 // routes.put("/:id", editUserController.handle);
 // routes.delete("/:id", deleteUserUseCase.handle);
