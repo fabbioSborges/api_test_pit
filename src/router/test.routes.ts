@@ -7,9 +7,11 @@ import { IniciarTesteController } from "../modules/Answers/IniciarTeste/IniciarT
 import { ListAnswersUserController } from "../modules/Answers/ListAnswersUser/ListAnswersUserController";
 // import { ListQuestionController } from "../modules/Question/listQuestion/ListQuestionController";
 import {RespostaAssinaladaController} from '../modules/Answers/EnviarResposta/RespostaAssinaladaController'
+import { ReceiveResponsesController } from "../modules/Answers/ReceiveResponses/ReceiveResponsesController";
 
 const routes = Router();
 
+const receiveResponsesController = new ReceiveResponsesController()
 const iniciarTesteController = new IniciarTesteController()
 // const listQuestionController = new ListQuestionController();
 // const createQuestionController = new CreateQuestionController();
@@ -18,6 +20,7 @@ const listAnswersUserController = new ListAnswersUserController();
 // const deleteUserUseCase = new DeleteUserController();
 const respostaAssinaladaController = new RespostaAssinaladaController()
 
+routes.post("/receiver/:phone", receiveResponsesController.handle);
 routes.post("/resposta", respostaAssinaladaController.handle);
 routes.post("/iniciar/:phone", iniciarTesteController.handle);
 // routes.post("", createQuestionController.handle);
