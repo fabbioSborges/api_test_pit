@@ -7,8 +7,8 @@ export class ValidarUseUseCase {
         cpf: cpf
       }
     });
-
-    if(!user){
+    console.log(user)
+    if(user.length == 0){
       return {"is_valid": false, 
         "message": `Não é possivel validar o candidato: CPF ${cpf} não encontrado`}
     }
