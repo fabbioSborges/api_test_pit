@@ -1,0 +1,28 @@
+version: '3.5'
+
+services:
+  # Application
+  database:
+    image: 'bitnami/postgresql'
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRESQL_USERNAME=user
+      - POSTGRESQL_PASSWORD=user_test
+      - POSTGRESQL_DATABASE=pit_respostas
+    volumes:
+      - $PWD/postgresql:/postgresql
+      
+  app:
+      restart: always
+      build: .
+      env_file: .env
+      ports: 
+        - 3000:3000
+      environment:
+        - DATABASE_URL=$DATABASE_URL
+      volumes:
+        - .:/home/node/app
+      depends_on:
+        - database
