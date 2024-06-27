@@ -30,7 +30,7 @@ model Questions {
   alternative2 String
   alternative3 String
   alternative4 String
-  correct      Int
+  correct      String
   Answers      Answers[]
 }
 
@@ -42,7 +42,7 @@ model Answers {
   userId      Int       
   question    Questions @relation(fields: [questionId], references: [id])
   questionId  Int       
-  correct      Int?
-  alternative  Int?
+  correct      String?
+  alternative  String?
 
 }

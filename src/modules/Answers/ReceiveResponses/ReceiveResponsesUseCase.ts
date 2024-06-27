@@ -34,6 +34,7 @@ export class ReceiveResponsesUseCase {
       })
     })
 
+
     const listAnswersUserUseCase = new ListAnswersUserUseCase()
     const respostas = await listAnswersUserUseCase.execute(user[0].phone)
     const total_pontos = respostas.reduce((sum, resposta) => {
@@ -51,6 +52,24 @@ export class ReceiveResponsesUseCase {
           final_test: new Date()
         }
       });
+
+      const answer1 = await prisma.answers.create({
+        data: {
+          userId: user[0].id,
+          questionId: 11,
+          correct:subjective1 ,
+          
+        }
+      })
+
+      const answer2 = await prisma.answers.create({
+        data: {
+          userId: user[0].id,
+          questionId: 12,
+          correct:subjective2 ,
+          
+        }
+      })
 
       return {message: "Respostas cadastradas,!"} 
 
