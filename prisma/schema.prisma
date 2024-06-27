@@ -20,6 +20,7 @@ model User {
   final_test DateTime?
   Answers    Answers[]
   total_pontos  Int?
+  situation String?
 }
 
 model Questions {

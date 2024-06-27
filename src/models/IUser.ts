@@ -9,4 +9,5 @@ export default interface IUser {
   email: string;
   Answers?: IAnswers[]
   cpf: string;
+  situation?: string
 }
