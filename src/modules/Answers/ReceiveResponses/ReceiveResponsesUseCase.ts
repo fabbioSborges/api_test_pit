@@ -4,7 +4,7 @@ import { ListAnswersUserUseCase } from "../ListAnswersUser/ListAnswersUserUseCas
 
 export class ReceiveResponsesUseCase {
   async execute(objectives: string[], subjective1: string, subjective2: string, cpf: string){
-    const minuto_max = 120;
+    const minuto_max = 20;
     const user = await prisma.user.findMany(
       {
         where: {
