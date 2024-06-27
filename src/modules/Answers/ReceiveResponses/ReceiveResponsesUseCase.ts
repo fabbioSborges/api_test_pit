@@ -70,7 +70,6 @@ export class ReceiveResponsesUseCase {
     const listAnswersUserUseCase = new ListAnswersUserUseCase()
     const respostas = await listAnswersUserUseCase.execute(user[0].phone)
     const total_pontos = respostas.reduce((sum, resposta) => {
-      console.log(resposta)
       if (resposta.alternative?.toLocaleLowerCase() === resposta.correct?.toLocaleLowerCase()){
         sum = sum +1 
        }
