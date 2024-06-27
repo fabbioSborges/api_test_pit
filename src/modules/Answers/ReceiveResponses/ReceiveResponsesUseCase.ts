@@ -19,7 +19,7 @@ export class ReceiveResponsesUseCase {
       return {sucess: true, message: `Usuário já realizou o teste na data ${user[0].final_test}`, is_finish: true } 
     }
     if(!user[0].start_text){
-      return {sucess: false, message: `Usuário ainda não validou o inicio do teste`} 
+      return {sucess: false, message: `Usuário ainda não validou o inicio do teste`, is_finish: false } 
     }
 
     const gabarito = await prisma.questions.findMany({
