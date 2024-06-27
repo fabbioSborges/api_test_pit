@@ -1,7 +1,7 @@
 import { prisma } from "../../../database/prismaClients";
 
 export class RespostaAssinaladaUseCase {
-  async execute(id: number, alternative: number) {
+  async execute(id: number, alternative: string) {
     const resposta = await prisma.answers.findUnique({
       where: {
         id

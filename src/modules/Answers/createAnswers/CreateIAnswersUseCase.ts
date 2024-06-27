@@ -83,15 +83,17 @@ export class CreateAnswersUseCase {
       }
     }
     const alternativas_embaralhadas = shuffleArray([0,1,2,3])
-    const correct = alternativas_embaralhadas.find(correta => {
-      return correta == question.correct
-    })
+    // const correct = alternativas_embaralhadas.find(correta => {
+    //   return correta == question.correct
+    // })
+    const correct = 'A'
+
 
     const answer = await prisma.answers.create({
       data: {
         userId: user.id,
         questionId: question.id,
-        correct: correct? correct+1:-1
+        correct: correct
       }
     })
 

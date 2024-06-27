@@ -15,7 +15,7 @@ model User {
   email      String    @unique
   name       String?
   phone      String    @unique
-  cpf        String?
+  cpf        String?   @unique
   start_text DateTime?
   final_test DateTime?
   Answers    Answers[]
@@ -24,12 +24,12 @@ model User {
 
 model Questions {
   id           Int       @id @default(autoincrement())
-  text         String
-  type         String
-  alternative1 String
-  alternative2 String
-  alternative3 String
-  alternative4 String
+  text         String?
+  type         String?
+  alternative1 String?
+  alternative2 String?
+  alternative3 String?
+  alternative4 String?
   correct      String
   Answers      Answers[]
 }

@@ -3,7 +3,7 @@ import { ListAnswersUserUseCase } from "../ListAnswersUser/ListAnswersUserUseCas
 
 
 export class ReceiveResponsesUseCase {
-  async execute(objectives: number[], subjective1: number, subjective2: number, cpf: string){
+  async execute(objectives: string[], subjective1: string, subjective2: string, cpf: string){
     const user = await prisma.user.findMany(
       {
         where: {
@@ -12,7 +12,10 @@ export class ReceiveResponsesUseCase {
       }
     )
     if (user.length == 0){
-      throw new Error("Usuário não encontrado");
+      return {sucess: false, message: `Usuário não encontrado`} 
+    }
+    if (user[0].final_test){
+      return {sucess: false, message: `Usuário já realizou o teste na data ${user[0].final_test}`} 
     }
 
     const gabarito = await prisma.questions.findMany({
@@ -26,7 +29,7 @@ export class ReceiveResponsesUseCase {
       const answer = await prisma.answers.create({
         data: {
           userId: user[0].id,
-          questionId: index,
+          questionId: index + 1,
           alternative: alternative,
           correct: gabarito[index].correct,
           
@@ -71,7 +74,7 @@ export class ReceiveResponsesUseCase {
         }
       })
 
-      return {message: "Respostas cadastradas,!"} 
+      return {sucess: true, message: "Respostas cadastradas!"} 
 
   }
 }
