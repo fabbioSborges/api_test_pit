@@ -13,7 +13,7 @@ export class ReceiveResponsesUseCase {
       }
     )
     if (user.length == 0){
-      return {sucess: false, message: `Usuário não encontrado`} 
+      return {sucess: false, message: `Usuário não encontrado`, is_finish: false} 
     }
     if (user[0].final_test){
       return {sucess: true, message: `Usuário já realizou o teste na data ${user[0].final_test}`, is_finish: true } 
@@ -148,10 +148,10 @@ export class ReceiveResponsesUseCase {
     });
 
     if( (final_test.getTime() - user[0].start_text.getTime()) / (1000 * 60) > minuto_max){
-      return {sucess: false, message: `Tempo de resposta foi maior que ${minuto_max} minutos`}
+      return {sucess: false, message: `Tempo de resposta foi maior que ${minuto_max} minutos`, is_finish: true}
     }
     
-    return {sucess: true, message: "Respostas cadastradas!"} 
+    return {sucess: true, message: "Respostas cadastradas!", is_finish: true} 
 
   }
 }
