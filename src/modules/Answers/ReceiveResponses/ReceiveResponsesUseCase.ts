@@ -16,7 +16,7 @@ export class ReceiveResponsesUseCase {
       return {sucess: false, message: `Usuário não encontrado`} 
     }
     if (user[0].final_test){
-      return {sucess: false, message: `Usuário já realizou o teste na data ${user[0].final_test}`} 
+      return {sucess: true, message: `Usuário já realizou o teste na data ${user[0].final_test}`, is_finish: true } 
     }
     if(!user[0].start_text){
       return {sucess: false, message: `Usuário ainda não validou o inicio do teste`} 
