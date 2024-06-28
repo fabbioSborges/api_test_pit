@@ -14,7 +14,7 @@ export class ValidarUseUseCase {
 
     if (user[0].final_test){
       return {"is_valid": false, 
-        "message": `Usuario ${user[0].name} finalizou o teste no horario ${user[0].final_test} `, 
+        "message": `Usuario finalizou o teste no horario ${user[0].final_test} `, 
         "is_finish": true}
     }
 
@@ -28,7 +28,7 @@ export class ValidarUseUseCase {
     })
 
     return {"is_valid": true, 
-                    "message": `Usuario ${user[0].name} validado com sucesso`, "is_finish": false}
+                    "message": `Usuario ${user[0].cpf} validado com sucesso`, "is_finish": false}
   }
 }
 
